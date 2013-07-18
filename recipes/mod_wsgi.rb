@@ -31,8 +31,7 @@ when "rhel", "fedora", "arch"
 end
 
 file "#{node['apache']['dir']}/conf.d/wsgi.conf" do
-  action :delete
-  backup false
+  content ""
 end
 
 apache_module "wsgi"

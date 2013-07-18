@@ -65,8 +65,7 @@ when "freebsd"
 end
 
 file "#{node['apache']['dir']}/conf.d/php.conf" do
-  action :delete
-  backup false
+  content ""
 end
 
 apache_module "php5" do

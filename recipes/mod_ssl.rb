@@ -29,8 +29,7 @@ if platform_family?("rhel", "fedora", "suse")
   end
 
   file "#{node['apache']['dir']}/conf.d/ssl.conf" do
-    action :delete
-    backup false
+    content ""
   end
 end
 

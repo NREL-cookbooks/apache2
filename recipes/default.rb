@@ -82,8 +82,7 @@ if platform_family?("rhel", "fedora", "arch", "suse", "freebsd")
   # installed by default on centos/rhel, remove in favour of mods-enabled
   %w{ proxy_ajp auth_pam authz_ldap webalizer ssl welcome }.each do |f|
     file "#{node['apache']['dir']}/conf.d/#{f}.conf" do
-      action :delete
-      backup false
+      content ""
     end
   end
 
@@ -91,6 +90,14 @@ if platform_family?("rhel", "fedora", "arch", "suse", "freebsd")
   file "#{node['apache']['dir']}/conf.d/README" do
     action :delete
     backup false
+  end
+
+  # From older chef runs. Remove since we only want to include *.conf files (to
+  # prevent the README that yum will drop in on upgrades from wreaking havoc).
+  %w{ charset security }.each do |f|
+    file "#{node['apache']['dir']}/conf.d/#{f}" do
+      action :delete
+    end
   end
 
   # enable mod_deflate for consistency across distributions
@@ -173,7 +180,7 @@ template "apache2.conf" do
 end
 
 template "apache2-conf-security" do
-  path "#{node['apache']['dir']}/conf.d/security"
+  path "#{node['apache']['dir']}/conf.d/security.conf"
   source "security.erb"
   owner "root"
   group node['apache']['root_group']
@@ -183,7 +190,7 @@ template "apache2-conf-security" do
 end
 
 template "apache2-conf-charset" do
-  path "#{node['apache']['dir']}/conf.d/charset"
+  path "#{node['apache']['dir']}/conf.d/charset.conf"
   source "charset.erb"
   owner "root"
   group node['apache']['root_group']

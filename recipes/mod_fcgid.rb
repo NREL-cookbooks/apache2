@@ -26,8 +26,7 @@ elsif platform_family?("rhel", "fedora")
   end
 
   file "#{node['apache']['dir']}/conf.d/fcgid.conf" do
-    action :delete
-    backup false
+    content ""
   end
 
   directory "/var/run/httpd/mod_fcgid" do

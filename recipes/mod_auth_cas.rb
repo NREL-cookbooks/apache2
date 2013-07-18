@@ -41,8 +41,7 @@ else
     end
 
     file "#{node['apache']['dir']}/conf.d/auth_cas.conf" do
-      action :delete
-      backup false
+      content ""
     end
 
   end

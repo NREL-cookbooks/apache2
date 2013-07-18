@@ -30,8 +30,7 @@ when "rhel", "fedora"
 end
 
 file "#{node['apache']['dir']}/conf.d/python.conf" do
-  action :delete
-  backup false
+  content ""
 end
 
 apache_module "python"
