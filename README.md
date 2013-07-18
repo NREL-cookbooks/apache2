@@ -152,6 +152,8 @@ the top of the file.
 
 * `node['apache']['dir']` - Location for the Apache configuration
 * `node['apache']['log_dir']` - Location for Apache logs
+* `node['apache']['error_log']` - Location for the default error log
+* `node['apache']['access_log']` - Location for the default access log
 * `node['apache']['user']` - User Apache runs as
 * `node['apache']['group']` - Group Apache runs as
 * `node['apache']['binary']` - Apache httpd server daemon
@@ -538,7 +540,7 @@ create a basic role for web servers that provide both HTTP and HTTPS:
       "recipe[apache2::mod_ssl]"
     )
     default_attributes(
-      "apache2" => {
+      "apache" => {
         "listen_ports" => ["80", "443"]
       }
     )
