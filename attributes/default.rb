@@ -166,3 +166,7 @@ default['apache']['default_modules'] = %w{
 %w{ log_config logio }.each do |log_mod|
   default['apache']['default_modules'] << log_mod if ["rhel", "fedora", "suse", "arch", "freebsd"].include?(node['platform_family'])
 end
+
+default[:apache][:logrotate][:frequency] = "daily"
+default[:apache][:logrotate][:rotate] = 90
+default[:apache][:logrotate][:extra_paths] = []
